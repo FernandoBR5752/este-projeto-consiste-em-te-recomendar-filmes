@@ -1,4 +1,4 @@
-// Banco de dados de filmes reduzido
+// Banco de dados de filmes expandido
 const moviesDatabase = [
     {
         title: "Toy Story",
@@ -47,6 +47,22 @@ const moviesDatabase = [
         year: 1999,
         description: "Um homem desiludido forma um clube de luta secreto como terapia alternativa, mas as coisas saem do controle.",
         poster: "https://m.media-amazon.com/images/M/MV5BMmEzNTkxYjQtZTc0MC00YTVjLTg5ZTEtZWMwOWVlYzY0NWIwXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UX1000_.jpg"
+    },
+    {
+        title: "Interestelar",
+        genres: ["ficcao", "aventura", "drama"],
+        ageRating: "doze",
+        year: 2014,
+        description: "Uma equipe de exploradores viaja através de um buraco de minhoca no espaço na tentativa de garantir a sobrevivência da humanidade.",
+        poster: "https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg"
+    },
+    {
+        title: "Coringa",
+        genres: ["drama", "crime"],
+        ageRating: "dezoito",
+        year: 2019,
+        description: "Um comediante falido enlouquece e se torna um criminoso brutal na cidade de Gotham.",
+        poster: "https://m.media-amazon.com/images/M/MV5BNGVjNWI4ZGUtNzE0MS00YTJmLWE0ZDctN2ZiYTk2YmI3NTYyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg"
     }
 ];
 
@@ -79,17 +95,24 @@ function renderRecommendations(movies) {
     container.innerHTML = '';
     
     if (movies.length === 0) {
-        container.innerHTML = '<p>Não encontramos recomendações com base nas suas preferências. Tente alterar o gênero selecionado.</p>';
+        container.innerHTML = `
+            <div class="no-results animate__animated animate__fadeIn">
+                <i class="icon-sad-tear" style="font-size: 3em; color: var(--text-light); margin-bottom: 20px;"></i>
+                <h3>Nenhum filme encontrado</h3>
+                <p>Não encontramos recomendações com base nas suas preferências. Tente alterar o gênero selecionado.</p>
+            </div>
+        `;
         return;
     }
     
-    movies.forEach(movie => {
+    movies.forEach((movie, index) => {
         const movieCard = document.createElement('div');
-        movieCard.className = 'movie-card';
+        movieCard.className = 'movie-card animate__animated animate__fadeIn';
+        movieCard.style.animationDelay = `${index * 0.1}s`;
         
         const poster = movie.poster ? 
             `<img src="${movie.poster}" alt="${movie.title}" class="movie-poster">` : 
-            '<div class="movie-poster" style="background-color: #eee; display: flex; align-items: center; justify-content: center;">Sem imagem</div>';
+            '<div class="movie-poster" style="background: linear-gradient(to bottom right, #f0f0f0, #e0e0e0); display: flex; align-items: center; justify-content: center; color: #999;"><i class="icon-film" style="font-size: 3em;"></i></div>';
         
         const ageRatingClass = movie.ageRating;
         const ageRatingText = {
@@ -109,7 +132,7 @@ function renderRecommendations(movies) {
             ${poster}
             <div class="movie-info">
                 <h3 class="movie-title">${movie.title} <span class="age-rating ${ageRatingClass}">${ageRatingText}</span></h3>
-                <div class="movie-meta">${movie.year}</div>
+                <div class="movie-meta"><i class="icon-calendar"></i> ${movie.year}</div>
                 <div class="genre-tags">${genreTags}</div>
                 <p class="movie-description">${movie.description}</p>
             </div>
@@ -150,10 +173,28 @@ document.getElementById('preferences-form').addEventListener('submit', function(
     
     document.getElementById('form-section').classList.add('hidden');
     document.getElementById('results-section').classList.remove('hidden');
+    
+    // Scroll suave para os resultados
+    setTimeout(() => {
+        document.getElementById('results-section').scrollIntoView({ behavior: 'smooth' });
+    }, 300);
 });
 
 document.getElementById('back-button').addEventListener('click', function() {
     document.getElementById('results-section').classList.add('hidden');
     document.getElementById('form-section').classList.remove('hidden');
-    window.scrollTo(0, 0);
+    
+    // Scroll suave para o topo
+    setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 300);
+});
+
+// Adiciona ícones do Font Awesome
+document.addEventListener('DOMContentLoaded', function() {
+    const head = document.querySelector('head');
+    const fontAwesome = document.createElement('link');
+    fontAwesome.rel = 'stylesheet';
+    fontAwesome.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css';
+    head.appendChild(fontAwesome);
 });
