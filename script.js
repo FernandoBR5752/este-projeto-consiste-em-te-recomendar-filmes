@@ -19,3 +19,116 @@ header {
     margin-bottom: 30px;
     border-radius: 0 0 10px 10px;
 }
+h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+.form-section, .results-section {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #c0392b;
+}
+
+.movie-card {
+    display: flex;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.movie-poster {
+    width: 150px;
+    height: 225px;
+    object-fit: cover;
+}
+
+.movie-info {
+    padding: 15px;
+    flex: 1;
+}
+
+.movie-title {
+    font-size: 1.5em;
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+.movie-meta {
+    color: #7f8c8d;
+    margin-bottom: 10px;
+}
+
+.movie-description {
+    margin-bottom: 10px;
+}
+
+.age-rating {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+.livre { background-color: #2ecc71; color: white; }
+.dez { background-color: #f39c12; color: white; }
+.doze { background-color: #e67e22; color: white; }
+.quatorze { background-color: #d35400; color: white; }
+.dezesseis { background-color: #c0392b; color: white; }
+.dezoito { background-color: #8e44ad; color: white; }
+
+.hidden {
+    display: none;
+}
+
+.genre-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.genre-tag {
+    background-color: #3498db;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+}
